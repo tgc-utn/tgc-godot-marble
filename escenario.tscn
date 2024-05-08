@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnw62pk7i1qgi"]
+
+[ext_resource type="Script" path="res://Marble.cs" id="1_qmdnb"]
+[ext_resource type="PackedScene" uid="uid://duvnsaf8xso2t" path="res://rampas/curve.glb" id="2_50v4k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m17s8"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jl3t7"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_636wv"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_vyxtq"]
+radius = 0.1
+height = 0.2
+
+[node name="Escenario" type="Node3D"]
+transform = Transform3D(0.999289, -0.0377076, 0, 0.0377076, 0.999289, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.075, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_m17s8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_jl3t7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.99781, -0.0580314, 0.0317353, -0.0580314, -0.537889, 0.841016, -0.0317353, -0.841016, -0.540079, 0.960418, 25.452, 0)
+shadow_enabled = true
+
+[node name="Marble" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47587, 3.43315, 3.13851)
+script = ExtResource("1_qmdnb")
+
+[node name="CameraPivot" type="Marker3D" parent="Marble"]
+transform = Transform3D(1, 3.72529e-09, 3.72529e-09, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.134279, 0.183801, 2.88863)
+
+[node name="Camera3D" type="Camera3D" parent="Marble/CameraPivot"]
+transform = Transform3D(1, -3.72529e-09, 0, 0, 1, -2.68221e-07, 0, 0, 1, 0.111936, 2.09757, 2.09757)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Marble"]
+shape = SubResource("SphereShape3D_636wv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Marble"]
+mesh = SubResource("SphereMesh_vyxtq")
+
+[node name="rampas" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.554, -0.0963739, 3.91608)
+
+[node name="curve4" parent="rampas" instance=ExtResource("2_50v4k")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 2.22045e-16, 8.74228e-08, 0, -1, 2, 0, 2)
+
+[node name="curve3" parent="rampas" instance=ExtResource("2_50v4k")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2)
+
+[node name="curve" parent="rampas" instance=ExtResource("2_50v4k")]
+
+[node name="curve2" parent="rampas" instance=ExtResource("2_50v4k")]
+transform = Transform3D(-4.37114e-08, 0, -1, 3.33067e-16, 1, 0, 1, 0, -4.37114e-08, 2, 0, 0)
