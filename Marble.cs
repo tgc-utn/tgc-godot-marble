@@ -8,7 +8,7 @@ public partial class Marble : CharacterBody3D
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
@@ -32,8 +32,8 @@ public partial class Marble : CharacterBody3D
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed * (float)delta);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed * (float)delta);
 		}
 
 		Velocity = velocity;
